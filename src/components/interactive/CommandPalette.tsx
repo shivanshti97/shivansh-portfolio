@@ -18,7 +18,8 @@ import {
   Volume2,
   VolumeX,
   Copy,
-  Check
+  Check,
+  Phone
 } from 'lucide-react';
 import { sound } from '@/lib/utils';
 import { PERSONAL_INFO, PROJECTS } from '@/data/portfolio-data';
@@ -27,6 +28,7 @@ export const CommandPalette: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [copied, setCopied] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -66,6 +68,13 @@ export const CommandPalette: React.FC = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const copyPhone = () => {
+    sound.playChime();
+    navigator.clipboard.writeText(PERSONAL_INFO.phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   const navItems = [
@@ -133,6 +142,16 @@ export const CommandPalette: React.FC = () => {
                 <span>Copy Email ({PERSONAL_INFO.email})</span>
               </div>
               {copied && <span className="text-emerald-400 font-mono">Copied!</span>}
+            </button>
+            <button
+              onClick={copyPhone}
+              className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-white/[0.05] text-slate-300 hover:text-white transition-all text-left"
+            >
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Copy Phone / WhatsApp ({PERSONAL_INFO.phone})</span>
+              </div>
+              {copiedPhone && <span className="text-emerald-400 font-mono">Copied!</span>}
             </button>
             <button
               onClick={() => {

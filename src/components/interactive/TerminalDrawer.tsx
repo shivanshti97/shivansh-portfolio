@@ -78,7 +78,7 @@ export const TerminalDrawer: React.FC = () => {
         break;
 
       case 'contact':
-        res = `Email: ${PERSONAL_INFO.email}\nGitHub: ${PERSONAL_INFO.github}\nLinkedIn: ${PERSONAL_INFO.linkedin}`;
+        res = `Email: ${PERSONAL_INFO.email}\nPhone: ${PERSONAL_INFO.phone}\nGitHub: ${PERSONAL_INFO.github}\nLinkedIn: ${PERSONAL_INFO.linkedin}`;
         break;
 
       case 'clear':

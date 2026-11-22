@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Cloud, Mail } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Cloud, Mail, Phone } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data/portfolio-data';
 
 export const Footer: React.FC = () => {
@@ -103,7 +103,16 @@ export const Footer: React.FC = () => {
                   className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors group"
                 >
                   <Mail className="w-4 h-4 text-slate-400 group-hover:text-amber-300" />
-                  <span>Direct Email</span>
+                  <span>{PERSONAL_INFO.email}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${PERSONAL_INFO.phone}`}
+                  className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors group"
+                >
+                  <Phone className="w-4 h-4 text-slate-400 group-hover:text-emerald-400" />
+                  <span>{PERSONAL_INFO.phone}</span>
                 </a>
               </li>
             </ul>

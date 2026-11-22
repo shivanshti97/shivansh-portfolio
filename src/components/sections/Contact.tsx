@@ -10,21 +10,31 @@ import {
   Linkedin, 
   Cloud, 
   Sparkles,
-  ArrowUpRight 
+  ArrowUpRight,
+  Phone,
+  MessageSquare
 } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data/portfolio-data';
 import { sound } from '@/lib/utils';
 
 export const Contact: React.FC = () => {
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const copyEmail = () => {
     sound.playChime();
     navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const copyPhone = () => {
+    sound.playChime();
+    navigator.clipboard.writeText(PERSONAL_INFO.phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2500);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -53,39 +63,93 @@ export const Contact: React.FC = () => {
             </div>
 
             <p className="text-slate-300 text-base leading-relaxed font-light">
-              I am actively seeking Software Engineering and Frontend Developer internships for 2026/2027. Whether you want to discuss an open role, an AWS community event, a technical collaboration, or simply share thoughts on AI systems—my inbox is always open.
+              I am actively seeking Software Engineering and Frontend Developer internships for 2026/2027. Whether you want to discuss an open role, an AWS community event, a technical collaboration, or simply share thoughts on AI systems—my inbox and phone are always open.
             </p>
 
-            {/* Quick copy email box */}
-            <div className="p-4 rounded-2xl glass-panel border-white/[0.08] space-y-2">
-              <span className="text-xs font-mono text-slate-400 block uppercase tracking-wider">
-                Direct Email
-              </span>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-sm font-mono text-amber-300 truncate">
-                  {PERSONAL_INFO.email}
+            {/* Quick copy contacts */}
+            <div className="space-y-3">
+              {/* Email box */}
+              <div className="p-4 rounded-2xl glass-panel border-white/[0.08] space-y-2">
+                <span className="text-xs font-mono text-slate-400 block uppercase tracking-wider">
+                  Direct Email
                 </span>
-                <button
-                  onClick={copyEmail}
-                  className="px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 border border-white/[0.1] transition-all shrink-0"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400">Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Copy</span>
-                    </>
-                  )}
-                </button>
+                <div className="flex items-center justify-between gap-3">
+                  <a 
+                    href={`mailto:${PERSONAL_INFO.email}`}
+                    className="text-sm font-mono text-amber-300 hover:text-amber-200 transition-colors truncate"
+                  >
+                    {PERSONAL_INFO.email}
+                  </a>
+                  <button
+                    onClick={copyEmail}
+                    className="px-3 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1.5 bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 border border-white/[0.1] transition-all shrink-0"
+                    title="Copy Email"
+                  >
+                    {copiedEmail ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-emerald-400">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-slate-400" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Phone / WhatsApp box */}
+              <div className="p-4 rounded-2xl glass-panel border-white/[0.08] space-y-2">
+                <span className="text-xs font-mono text-slate-400 block uppercase tracking-wider">
+                  Contact Number / WhatsApp
+                </span>
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-emerald-400" />
+                    <a 
+                      href={`tel:${PERSONAL_INFO.phone}`}
+                      className="text-sm font-mono text-slate-200 hover:text-emerald-300 transition-colors"
+                    >
+                      {PERSONAL_INFO.phone}
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <a
+                      href={`https://wa.me/919310370585?text=Hi%20Shivansh,%20I%20saw%20your%20portfolio!`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 transition-all"
+                      title="Chat on WhatsApp"
+                    >
+                      <MessageSquare className="w-3 h-3" />
+                      <span>WhatsApp</span>
+                    </a>
+                    <button
+                      onClick={copyPhone}
+                      className="px-2.5 py-1.5 rounded-lg text-xs font-mono flex items-center gap-1 bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 border border-white/[0.1] transition-all shrink-0"
+                      title="Copy Phone"
+                    >
+                      {copiedPhone ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5 text-slate-400" />
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Social channels */}
-            <div className="space-y-2 pt-2">
+            <div className="space-y-2 pt-1">
               <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block">
                 Verified Social Channels
               </span>
@@ -141,7 +205,7 @@ export const Contact: React.FC = () => {
               Send a Direct Message
             </h3>
             <p className="text-xs text-slate-400 mb-6 font-light">
-              Submit your message below. It generates a pre-formatted dispatch directly to my personal inbox.
+              Submit your message below. It generates a pre-formatted dispatch directly to {PERSONAL_INFO.email}.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
