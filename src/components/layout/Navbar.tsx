@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Terminal, 
   Volume2, 
@@ -73,14 +74,20 @@ export const Navbar: React.FC = () => {
         }`}
       >
         <div className="flex items-center justify-between">
-          {/* Logo / Monogram */}
+          {/* Logo / Monogram & Photo */}
           <Link 
             href="#hero" 
             onClick={() => sound.playClick()}
             className="flex items-center gap-3 group"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500/20 to-sky-500/10 border border-white/10 flex items-center justify-center font-mono font-bold text-sm text-amber-400 group-hover:border-amber-400/50 group-hover:scale-105 transition-all">
-              ST
+            <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-white/10 group-hover:border-amber-400/50 group-hover:scale-105 transition-all bg-[#0d111a]">
+              <Image
+                src="/shivansh-profile.jpg"
+                alt="Shivansh Tiwari"
+                fill
+                sizes="36px"
+                className="object-cover object-top"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-medium text-sm text-slate-100 tracking-tight group-hover:text-amber-300 transition-colors">
